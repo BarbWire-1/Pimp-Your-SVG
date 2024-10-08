@@ -1,4 +1,4 @@
-#### This is a first init repo to test the functionality and ask for critics. The code is messy and ugly and needs a lot of love to hopefully look nicer later. Just don't read it ;)
+#### This is a first init repo to test the functionality and ask for critics. The code is messy and ugly and needs a lot of love to hopefully look nicer later. Just don't read it! ;)
 
 Check it out at:
 
