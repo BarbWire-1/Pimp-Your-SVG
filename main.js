@@ -24,7 +24,7 @@
 
 // TODO apply origin on select!!! IF NONE APPLY top-left
 
-
+// TODO convert points back into transform-select string????
 
 
 import SVGEditor from "./src/classes/SVGEditor.js";
