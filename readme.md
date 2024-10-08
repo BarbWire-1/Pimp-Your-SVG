@@ -2,4 +2,4 @@
 
 Check it out at:
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c451e9b8-1a0c-49bc-bef7-efceec46e068/deploy-status)](https://app.netlify.com/sites/pimp-your-svg/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c451e9b8-1a0c-49bc-bef7-efceec46e068/deploy-status)](https://pimp-your-svg.netlify.app)
