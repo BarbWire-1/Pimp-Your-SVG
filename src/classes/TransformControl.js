@@ -4,6 +4,12 @@
 
 //TODO the bbox must be UPDATED ON EACH CHANGE
 
+//TODO CLEAN THIS!!!!!!!!
+// TODO set select value to NAME again, NOT point!!!
+// TODO add scaleX,y set lock/unlock buttons for scale and skew
+
+//TODO the bbox must be UPDATED ON EACH CHANGE
+
 import { create, appendChildren } from '../shortHands.js';
 import { highlightBox } from './HighlightBox.js';
 
@@ -12,7 +18,7 @@ class TransformControl {
 		this.element = element;
 		this.scaleLock = true;
 
-		// UI
+		//UI
 		this.controlPanel = create('div', { class: "transform-control" });
 		this.contentContainer = create('div', { class: 'transform-content', style: "display: none" });
 
@@ -23,26 +29,29 @@ class TransformControl {
 		if (!this.element) return;
 		appendChildren(this.controlPanel, this.createHeader(), this.contentContainer);
 		this.transformOriginSelect = this.createTransformOriginSelect('Transform Origin');
-		this.transforms = this.initTransformInputs(); // Create transform inputs and populate obj
+		this.transforms = this.initTransformInputs(); //create transforms inputs and populate obj
 
 		this.createLockButtons();
 	}
 
 	// Initialize transform inputs as an object
 	initTransformInputs() {
+
 		if (!this.element) return;
 		const transform = this.element.getAttribute('transform') || '';
 
+
 		const transformConfig = {
+
 			translateX: {
 				label: 'Translation X',
 				value: this.getTranslation(transform)[ 0 ],
-				step: 1, min: -1500, max: 1500
+				step: 1, min: -500, max: 500
 			},
 			translateY: {
 				label: 'Translation Y',
 				value: this.getTranslation(transform)[ 1 ],
-				step: 1, min: -1500, max: 1500
+				step: 1, min: -500, max: 500
 			},
 			rotation: {
 				label: 'Rotation',
@@ -73,14 +82,14 @@ class TransformControl {
 
 		// Create inputs for each transform and assign them back to the config
 		Object.keys(transformConfig).forEach(key => {
+
 			const { label, value, step, min, max } = transformConfig[ key ];
 			transformConfig[ key ].input = this.createInput(label, value, step, min, max);
 		});
-
 		highlightBox.createHighlightRectangle(this.element);
 		highlightBox.updateDimensions(this.element);
 
-		return transformConfig; // Populated transforms object
+		return transformConfig; //  populated transforms object
 	}
 
 	// Create the collapsible header with an arrow
@@ -103,9 +112,10 @@ class TransformControl {
 		arrow.textContent = isCollapsed ? '▼' : '▶';
 	}
 
+
 	// Set input values using an object
 	setInputsValues(values) {
-		// console.log('Setting input values:', values); // Debugging log
+		//console.log('Setting input values:', values); // Debugging log
 		Object.keys(this.transforms).forEach(key => {
 			const input = this.transforms[ key ]?.input;
 			if (input) {
@@ -120,9 +130,7 @@ class TransformControl {
 				console.error(`Input for ${key} is undefined.`);
 			}
 		});
-
-		// Set the transform origin select value directly from the element's attribute
-		this.transformOriginSelect.value = this.element.getAttribute('transform-origin') || 'top-left';
+		this.transformOriginSelect.value = values.transformOrigin || 'top-left';
 	}
 
 	// Create an input field dynamically
@@ -188,6 +196,12 @@ class TransformControl {
 		return this.scaleLock;
 	}
 
+	// // Toggle skew lock
+	// toggleSkewLock = () => {
+	// 	this.skewLock = !this.skewLock;
+	// 	return this.skewLock;
+	// }
+
 	// Apply transformations to the element
 	applyTransform() {
 		if (!this.element) return;
@@ -209,12 +223,9 @@ class TransformControl {
 
 		this.element.setAttribute('transform', newTransform.trim());
 		highlightBox.updateDimensions(this.element);
-
-		// Update transform-origin directly from the select element
-		this.applyTransformOrigin();
 	}
 
-	// Extract values from the inputs
+	// extract values from the inputs
 	extractValues() {
 		const values = {};
 		Object.keys(this.transforms).forEach(key => {
@@ -222,6 +233,9 @@ class TransformControl {
 		});
 		return values;
 	}
+
+
+
 
 	// Create a dropdown for transform-origin
 	createTransformOriginSelect(labelText) {
@@ -241,44 +255,35 @@ class TransformControl {
 			select.appendChild(opt);
 		});
 
-		// Set initial selection from the element's transform-origin attribute
-		select.value = this.element.getAttribute('transform-origin') || 'top-left';
-
 		select.addEventListener('change', () => this.applyTransformOrigin());
-		appendChildren(container, label, select);
-		this.contentContainer.appendChild(container);
+
+		appendChildren(container, label, select)
+
+		this.contentContainer.appendChild(container); container
 		return select;
 	}
 
-	// Apply the selected transform origin
+	// based on the selected option
 	applyTransformOrigin() {
 		if (!this.element) return;
 
-
+		const originOption = this.transformOriginSelect.value;
 		const { x, y, width, height } = this.element.getBBox();
 
-		if (!this.element.getAttribute('transform-origin')) {
-			const originOption = this.transformOriginSelect.value;
-			const point = (a, b) => `${a} ${b}`;
-			const originMap = {
-				'top-left': point(x, y),
-				'top-right': point(x + width, y),
-				'center': point(x + width / 2, y + height / 2),
-				'bottom-left': point(x, y + height),
-				'bottom-right': point(x + width, y + height),
-			};
+		const point = (a, b) => `${a} ${b}`;
+		const originMap = {
+			'top-left': point(x, y),
+			'top-right': point(x + width, y),
+			'center': point(x + width / 2, y + height / 2),
+			'bottom-left': point(x, y + height),
+			'bottom-right': point(x + width, y + height),
+		};
 
-			const origin = originMap[ originOption ];
+		const origin = originMap[ originOption ];
 
-			// Set the transform-origin attribute on the element
-			this.element.setAttribute('transform-origin', origin || originMap[ 'top-left' ]);
-		}
-
+		this.element.setAttribute('transform-origin', origin);
 		highlightBox.updateDimensions(this.element);
 	}
-
-
-
 
 	// extract single transform values from the element's transform string
 	getTranslation(transform) {
