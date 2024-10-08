@@ -22,6 +22,8 @@
 // TODO ZOOM
 // TODO navigation-controls
 
+// TODO apply origin on select!!! IF NONE APPLY top-left
+
 
 
 

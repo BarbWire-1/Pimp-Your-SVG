@@ -72,6 +72,7 @@ class TransformControl {
 				value: this.getSkewY(transform),
 				step: 0.1, min: -25, max: 25
 			},
+
 		};
 
 		// Create inputs for each transform and assign them back to the config
@@ -82,7 +83,7 @@ class TransformControl {
 		});
 		highlightBox.createHighlightRectangle(this.element);
 		highlightBox.updateDimensions(this.element);
-
+		this.applyTransformOrigin()
 		return transformConfig; //  populated transforms object
 	}
 
@@ -125,6 +126,7 @@ class TransformControl {
 			}
 		});
 		this.transformOriginSelect.value = values.transformOrigin || 'top-left';
+
 	}
 
 	// Create an input field dynamically
@@ -275,7 +277,7 @@ class TransformControl {
 
 		const origin = originMap[ originOption ];
 
-		this.element.setAttribute('transform-origin', origin);
+		this.element.setAttribute('transform-origin', origin || originMap['top-left' ]);
 		highlightBox.updateDimensions(this.element);
 	}
 
