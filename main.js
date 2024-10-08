@@ -26,6 +26,8 @@
 
 // TODO convert points back into transform-select string????
 
+//TODO eventDelegation
+
 
 import SVGEditor from "./src/classes/SVGEditor.js";
 import TransformControl from "./src/classes/TransformControl.js";
@@ -48,13 +50,13 @@ document.getElementById('checkerboard-toggle').addEventListener('change', functi
     const svg = document.querySelector('svg');
     editor.patternManager.toggleCheckerboardVisibility(svg);
 });
-// document.getElementById('undoBtn').addEventListener('click', () => {
-//     editor.attributeManager.undo();
-// });
-//
-// document.getElementById('redoBtn').addEventListener('click', () => {
-//     editor.attributeManager.redo();
-// });
+ document.getElementById('undoBtn').addEventListener('click', () => {
+    editor.attributeManager.undo();
+ });
+
+document.getElementById('redoBtn').addEventListener('click', () => {
+    editor.attributeManager.redo();
+ });
 
 let test = new TransformControl().controlPanel
 //container.appendChild(test)

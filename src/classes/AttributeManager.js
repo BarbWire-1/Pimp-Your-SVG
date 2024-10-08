@@ -6,11 +6,12 @@ import TransformControl from "./TransformControl.js";
 
 
 class AttributeManager {
-	constructor (inputContainer, svgElementManager) {
+	constructor (inputContainer, svgElementManager, patternManager) {
 		this.inputContainer = inputContainer;
 		this.svgElementManager = svgElementManager;
-		this.activeEl = this.svgElementManager.activEl
-		//this.historyManager = new HistoryManager(); // Initialize the history manager
+		this.activeEl = this.svgElementManager.activEl;
+		this.patternManager = patternManager;
+		this.historyManager = new HistoryManager(); // Initialize the history manager
 		this.excludedAttributes = [ 'data-active', 'xmlns', 'xmlns:xlink', 'version', 'xml:space', 'transform', 'transform-origin' ];
 
 	}
@@ -47,23 +48,23 @@ class AttributeManager {
 		this.addToggleFunctionality(sectionDiv, attributesContainer);
 
 		// // Save the initial state for undo/redo when modifying attributes
-		// const initialState = element.outerHTML;
-		// this.historyManager.saveState(initialState);
+		const initialState = el.outerHTML;
+		this.historyManager.saveState(initialState);
 
-		// Add event listeners for changes to track them in history
-		// 		Object.entries(obj).forEach(([ key, value ]) => {
-		// 			if (!this.excludedAttributes.includes(key)) {
-		// 				// Modify this part to track the change in history
-		// 				const inputElement = this.createAttributeDiv(key, value, el);
-		//
-		// 				// // Track attribute changes for undo/redo
-		// 				// inputElement.addEventListener('input', () => {
-		// 				//
-		// 				// 	const currentState = element.outerHTML;
-		// 				// 	this.historyManager.saveState(currentState);
-		// 				// });
-		// 			}
-		// 		});
+// 		//Add event listeners for changes to track them in history
+// 				Object.entries(obj).forEach(([ key, value ]) => {
+// 					if (!this.excludedAttributes.includes(key)) {
+// 						// Modify this part to track the change in history
+// 						const inputElement = this.createAttributeDiv(key, value, el);
+//
+// 						// // Track attribute changes for undo/redo
+// 						inputElement.addEventListener('input', () => {
+//
+// 							const currentState = element.outerHTML;
+// 							this.historyManager.saveState(currentState);
+// 						});
+// 					}
+// 				});
 		el.removeAttribute('style');// as splitted in single attributes
 	}
 
@@ -115,10 +116,7 @@ class AttributeManager {
 		input.addEventListener('mouseup', () => {
 			//console.log(input, "released")
 
-			//TODO not properly implemented yet
-			if (key === 'viewBox') {
-				this.updateCheckerboard(); // Call the checkerboard update function
-			}
+
 			this.saveState(element); // Save state for history
 		});
 		return input;
@@ -131,6 +129,10 @@ class AttributeManager {
 
 		input.addEventListener('input', () => {
 			element.setAttribute(key, input.value);
+			//TODO not properly implemented yet
+			if (key === 'viewBox') {
+				this.updateCheckerboard(); 
+			}
 
 		});
 
@@ -142,6 +144,7 @@ class AttributeManager {
 		console.log("Storing previous state.", el);
 	}
 	updateCheckerboard() {
+		this.patternManager?.updateCheckerBoard()
 		// Logic to update the checkerboard goes here
 		console.log("Updating checkerboard based on new viewBox.");
 		// You can add your checkerboard update logic here.
@@ -241,22 +244,22 @@ attributesContainer.appendChild(label)
 
 
 	// 	// Undo the last action
-	// 	undo() {
-	// 		const lastState = this.historyManager.undo();
-	// 		if (lastState) {
-	// 			console.log(lastState)
-	// 			this.applyState(lastState);
-	// 		}
-	// 	}
-	//
-	// 	// Redo the last undone action
-	// 	redo() {
-	// 		const nextState = this.historyManager.redo();
-	// 		if (nextState) {
-	// 			console.log(nextState)
-	// 			this.applyState(nextState);
-	// 		}
-	// 	}
+		undo() {
+			const lastState = this.historyManager.undo();
+			if (lastState) {
+				console.log(lastState)
+				this.applyState(lastState);
+			}
+		}
+
+		// Redo the last undone action
+		redo() {
+			const nextState = this.historyManager.redo();
+			if (nextState) {
+				console.log(nextState)
+				this.applyState(nextState);
+			}
+		}
 
 	// Apply the SVG state from undo/redo
 	applyState(state) {

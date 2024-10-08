@@ -12,7 +12,7 @@ class SVGEditor {
 		this.fileHandler = new FileHandler(this);
 		this.downloader = new Downloader(this);
 		this.patternManager = new PatternManager(this.svgContainer) || null;
-		this.attributeManager = new AttributeManager(this.inputContainer, this.svgElementManager);
+		this.attributeManager = new AttributeManager(this.inputContainer, this.svgElementManager, this.patternManager);
 
 		this.initEventListeners();
 	}
