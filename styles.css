@@ -1,0 +1,387 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins&display=swap);
+
+/* Color Theme Variables */
+:root {
+   --bg-light: #323232;
+   --bg-dark: #2a2a2a;
+   --primary-color: #ff4281;
+   /* Magenta */
+   --secondary-color: #6A6A6A;
+   --accent-hover: #357ABD;
+   --input-bg: #FFF3E0;
+   --border-light: #ddd;
+   --border-dark: #555;
+   --trash-hover: #C9302C;
+   --white: #ffffff;
+   --text-light: #e0e0e0;
+
+   --padding-sm: 1rem;
+   --padding-md: 1.5rem;
+   --padding-lg: 2rem;
+
+   --font-sm: 0.7rem;
+   --font-md: 1rem;
+   --font-lg: 1.25rem;
+
+   --shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* General Body Styles */
+body {
+   margin: 0;
+   padding: 0;
+   border: none;
+   box-sizing: border-box;
+   outline: none;
+   font-family: Montserrat;
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+   background-color: var(--bg-light);
+   color: var(--white);
+
+}
+
+/* Title Bar */
+#title-bar {
+   background-color: var(--bg-light);
+   color: var(--white);
+   padding: var(--padding-lg);
+   font-size: var(--font-lg);
+   font-weight: bold;
+   text-align: center;
+   box-shadow: 0 5px 8px rgba(250, 183, 238, .1);
+   z-index: 1;
+}
+
+/* Button Bar */
+#button-bar {
+   padding: var(--padding-md);
+   background-color: var(--bg-light);
+   display: flex;
+   justify-content: center;
+   gap: var(--padding-sm);
+   box-shadow: 0 -5px 8px rgba(250, 183, 238, .1);
+}
+
+/* Content Layout */
+#content {
+   display: flex;
+   flex-grow: 1;
+   overflow: hidden;
+}
+
+/* Input Container */
+#input-container {
+   flex-basis: 15em;
+   flex-shrink: 0;
+   background-color: var(--bg-dark);
+   padding: var(--padding-md);
+   overflow-y: auto;
+   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+   border-right: 1px solid var(--border-dark);
+}
+
+/* Input Rows */
+.input-row {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+/* SVG Container */
+#svg-container {
+   flex-grow: 1;
+   background-color: var(--bg-light);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: var(--padding-md);
+   border-left: 1px solid var(--border-dark);
+   pointer-events: none;
+
+}
+
+/* Button and Input Styling */
+button, input[type="file"] {
+   padding: 0.75em 1.5em;
+   font-size: var(--font-md);
+   cursor: pointer;
+   border: none;
+   border-radius: 0.25em;
+   background-color: var(--primary-color);
+   color: var(--white);
+   transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="file"]:hover {
+   background-color: var(--accent-hover);
+}
+
+/* Input Elements Styling */
+.input-element {
+   margin-bottom: var(--padding-sm);
+   display: flex;
+   flex-direction: column;
+   font-size: var(--font-md)
+}
+
+/* Label Styling */
+label {
+   font-weight: bold;
+   margin-bottom: 0.5em;
+   color: var(--text-light);
+}
+
+/* Input Fields Styling */
+input[type="text"], input[type="number"] {
+   width: 97%;
+   padding: 0.75em;
+   margin-top: 0.2em;
+   border-bottom: 1px solid var(--border-light);
+   border-radius: 0.25em;
+   background-color: var(--white);
+   color: var(--bg-dark);
+   background-color: rgba(255, 255, 255, 0.1);
+   color: white;
+   padding: 2px;
+
+}
+
+/* Delete Button Styling */
+.delete-attribute {
+   background: url('./images/trash.svg') no-repeat center;
+   background-size: 1.5em;
+   width: 1.75em;
+   height: 1.75em;
+   cursor: pointer;
+   border: none;
+   padding-right: 5px;
+   outline: none;
+   margin-top: 6px;
+   transition: background-color 0.3s ease;
+}
+
+.delete-attribute:hover {
+   background-color: var(--trash-hover);
+}
+
+#svg-container svg {
+
+   max-width: 100%;
+   max-height: 100%;
+   height: auto;
+}
+
+/* Attribute Section */
+.attribute-section {
+   font-size: var(--font-sm);
+   margin-top: var(--padding-md);
+   border: 1px solid var(--border-dark);
+   padding: var(--padding-md);
+   background-color: var(--bg-light);
+}
+
+/* Toggle Arrow */
+.toggle-arrow {
+   cursor: pointer;
+   margin-right: 0.5em;
+   color: var(--text-light);
+}
+
+/* Section Title */
+.section-title {
+   font-weight: bold;
+   margin-bottom: var(--padding-sm);
+   color: var(--primary-color);
+}
+
+/* Row Styles for Inputs */
+.input-row {
+   display: flex;
+   align-items: center;
+}
+
+/* Button Spacing */
+button {
+   margin-left: 0.5em;
+}
+
+
+
+/* Transform Control Panel */
+.transform-control-panel {
+   display: block;
+}
+
+/* Hover States for Interactive Elements */
+button:hover {
+   background-color: var(--accent-hover);
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+   outline: none;
+   border-color: var(--primary-color);
+}
+
+/* Ensure input arrows for number inputs are always visible */
+input[type="number"] {
+   -moz-appearance: textfield;
+   /* Standardize appearance in Firefox */
+   appearance: auto;
+   /* Reset appearance to default */
+
+   /* Ensure space for the arrows */
+}
+
+/* Webkit-based browsers (Chrome, Safari) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+   -webkit-appearance: inner-spin-button;
+   /* Force arrows to appear */
+   opacity: 1;
+   /* Ensure they are visible */
+   display: block;
+   /* Always display the arrows */
+}
+
+/* Firefox-specific styling */
+input[type="number"]::-moz-inner-spin-button {
+   -moz-appearance: inner-spin-button;
+   /* Ensure arrows appear in Firefox */
+   opacity: 1;
+   display: block;
+}
+
+/* General Styling for input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-moz-inner-spin-button {
+   position: relative;
+
+   /* Adjust positioning if needed */
+
+   pointer-events: auto;
+
+   /* Ensure arrows are interactive */
+}
+
+.transform-control {
+   position: relative;
+   background-color: none;
+   border: 1px solid #000;
+   padding: 10px;
+
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 10px;
+
+}
+
+.transform-control div {
+
+   margin: 5px;
+   width: 95%;
+
+}
+
+.transform-control, .input-element label {
+   font-weight: bold;
+   font-size: var(--font-sm)
+}
+
+.transform-control, .input-element input, select {
+   background-color: rgba(255, 255, 255, 0.1);
+   color: white;
+   padding: 0;
+
+}
+
+.transform-control div:last-of-type {
+   display: flex;
+   width: 95%;
+   justify-content: space-between;
+}
+
+.color-input-wrapper {
+   height: 1.5em;
+   width: 1.5em;
+   overflow: hidden;
+   border-radius: 50%;
+   display: inline-flex;
+   align-items: center;
+   position: relative;
+   border: 1px solid rgb(4, 72, 67);
+   box-shadow: 3px 3px 10px #212121;
+}
+
+.color-input-wrapper input[type=color] {
+   position: absolute;
+   height: 4em;
+   width: 4em;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   overflow: hidden;
+
+   margin: 0;
+   padding: 0;
+
+}
+
+
+input[type="range"] {
+   -webkit-appearance: none;
+  width: 98%;
+   border-radius: 2px;
+   border: 1px solid var(--secondary-color);
+   height: 5px;
+   margin-top: 5px;
+   box-shadow: var(--shadow);
+   background-color: var(--bg-dark);
+
+}
+
+input[type="range"]:focus {
+   border: 1px solid var(--primary-color);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   height: 12px;
+   width: 12px;
+   border-radius: 50%;
+   background-color: var(--primary-color);
+   cursor: ew-resize;
+   box-shadow: var(--shadow);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+   transform: scale(1.7, 1);
+}
+
+.transform-header {
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   font-weight: bold;
+   padding: 5px;
+   width: 95%;
+
+}
+
+.transform-header .arrow {
+   margin-right: 10px;
+}
+
+.transform-control.collapsed .transform-header+div {
+   display: none;
+}
+
+.transform-control.collapsed .arrow {
+   content: '▶';
+}
+
+.transform-control:not(.collapsed) .arrow {
+   content: '▼';
+}

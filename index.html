@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>SVG Modifier</title>
+   
+
+    <script type="module" src="main.js"></script>
+
+</head>
+
+<body>
+    <!-- Title Bar -->
+    <div id="title-bar">
+        Pimp Your SVG
+    </div>
+
+
+    <!-- Main content area -->
+    <div id="content">
+
+
+        <!-- SVG Container -->
+        <div id="svg-container">
+
+
+            <!-- SVG will be loaded and displayed here -->
+        </div>
+        <!-- Input Container -->
+        <div id="input-container">
+            <!-- Inputs will be dynamically generated here -->
+
+        </div>
+    </div>
+    <!-- Button Bar -->
+    <div id="button-bar">
+        <label>
+            <input type="checkbox" id="replace-toggle" checked> Replace current content
+        </label>
+        <label>
+            <input type="checkbox" id="checkerboard-toggle" checked /> Show Checkerboard
+        </label>
+
+        <input type="file" id="file-input" accept=".svg" />
+        <button id="undoBtn">Undo</button>
+        <button id="redoBtn">Redo</button>
+        <button id="download-btn">Download SVG</button>
+    </div>
+</body>
+
+</html>
