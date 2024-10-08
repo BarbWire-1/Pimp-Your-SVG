@@ -40,12 +40,12 @@ class TransformControl {
 			translateX: {
 				label: 'Translation X',
 				value: this.getTranslation(transform)[ 0 ],
-				step: 1, min: -500, max: 500
+				step: 1, min: -1500, max: 1500
 			},
 			translateY: {
 				label: 'Translation Y',
 				value: this.getTranslation(transform)[ 1 ],
-				step: 1, min: -500, max: 500
+				step: 1, min: -1500, max: 1500
 			},
 			rotation: {
 				label: 'Rotation',

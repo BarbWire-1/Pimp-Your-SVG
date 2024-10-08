@@ -19,6 +19,10 @@
 // TODO add rearrange layers
 
 
+// TODO ZOOM
+// TODO navigation-controls
+
+
 
 
 import SVGEditor from "./src/classes/SVGEditor.js";
@@ -26,6 +30,7 @@ import TransformControl from "./src/classes/TransformControl.js";
 
 
 const container = document.getElementById('input-container');
+container.innerText = "Click an element in your svg to open the settings panel."
 const svgContainer = document.getElementById('svg-container');
 
 

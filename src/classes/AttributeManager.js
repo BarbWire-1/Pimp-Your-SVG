@@ -17,7 +17,7 @@ class AttributeManager {
 	appendComponents(obj, isParent = false, el) {
 		if (!el) return;// exclude NOT svg els here (??)
 
-		el.removeAttribute('style');// as splitted in single attributes
+
 
 		const sectionDiv = this.createSection(isParent, el);
 		const attributesContainer = create('div', {
@@ -37,6 +37,7 @@ class AttributeManager {
 			if (!this.excludedAttributes.includes(key)) {
 				const attributeDiv = this.createAttributeDiv(key, value, el);
 				attributesContainer.appendChild(attributeDiv);
+				el.setAttribute(key, value)
 			}
 		});
 
@@ -63,7 +64,7 @@ class AttributeManager {
 		// 				// });
 		// 			}
 		// 		});
-
+		el.removeAttribute('style');// as splitted in single attributes
 	}
 
 	createSection(isParent, el) {
@@ -112,7 +113,7 @@ class AttributeManager {
 		// TODO NOT WORKING FOR TRANSFORM CONTROLS!!!!
 		// on mouseup store prev state
 		input.addEventListener('mouseup', () => {
-			console.log(input, "released")
+			//console.log(input, "released")
 
 			//TODO not properly implemented yet
 			if (key === 'viewBox') {
