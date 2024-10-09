@@ -4,6 +4,7 @@ import { colorValueToHex } from '../utils.js';
 import HistoryManager from "./HistoryManager.js";
 import TransformControl from "./TransformControl.js";
 
+//TODO STORE ON BLUR
 
 class AttributeManager {
 	constructor (inputContainer, svgElementManager, patternManager) {
@@ -131,7 +132,7 @@ class AttributeManager {
 			element.setAttribute(key, input.value);
 			//TODO not properly implemented yet
 			if (key === 'viewBox') {
-				this.updateCheckerboard(); 
+				this.updateCheckerboard();
 			}
 
 		});
